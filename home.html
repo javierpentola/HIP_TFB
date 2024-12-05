@@ -6,7 +6,6 @@
     <title>HIP ENERGY Navigation</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #f2c517;
@@ -30,11 +29,11 @@
             --primary-color: #000000;
             --primary-dark: #ffffff;
             --accent-color: #ffffff;
-            --text-color: #000000;
+            --text-color: #ffffff;
         }
 
         .accessible-mode .logo {
-            content: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/negra-breHQ41WqrzgIYL6eWCIeGlva5Wk1f.png');
+            filter: invert(1);
         }
 
         .sidebar {
@@ -126,11 +125,6 @@
             background-color: #ffffff;
             color: #000000;
         }
-		
-		.consumption-item {
-			color: #000 !important;
-		}
-
 
         .logo-container {
             padding: 1rem;
@@ -147,14 +141,19 @@
         .logo {
             width: 150px;
             height: auto;
+            transition: filter var(--transition-speed);
         }
 
         .main-content {
             margin-left: var(--sidebar-width);
             padding: 2rem;
             transition: margin-left var(--transition-speed) ease, background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-            min-height: 100vh;
-            background-color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
         }
 
         .accessible-mode .main-content {
@@ -195,63 +194,6 @@
             margin-top: auto;
         }
 
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-        }
-
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-
-        .stat {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .chart-container {
-            width: 100%;
-            height: 300px;
-        }
-
-        .accessible-mode .card {
-            background-color: #ffffff;
-            color: #000000;
-        }
-
-        .accessible-mode .stat {
-            color: #000000;
-        }
-
-        .accessible-mode canvas {
-            filter: grayscale(100%) contrast(120%);
-        }
-
-        .accessible-mode .nav-item {
-            color: #ffffff;
-        }
-
-        .accessible-mode .brand {
-            color: #ffffff;
-        }
-
-
-        .accessible-mode .main-content h1,
-        .accessible-mode .card {
-            color: #000000;
-        }
-
         @media (max-width: 768px) {
             .sidebar {
                 width: var(--sidebar-width);
@@ -269,13 +211,13 @@
     <nav class="sidebar">
         <div class="brand">HIP ENERGY</div>
         <div class="nav-items">
-            <a href="index.html" class="nav-item">
+            <a href="index.html" class="nav-item active">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
-            <a href="consumo.html" class="nav-item active">
+            <a href="consumo.html" class="nav-item">
                 <i class="fas fa-chart-line"></i>
-                <span class="consumption-item">Consumption</span>
+                <span>Consumption</span>
             </a>
             <a href="facturas.html" class="nav-item">
                 <i class="fas fa-file-invoice-dollar"></i>
@@ -318,67 +260,13 @@
             </a>
         </div>
         <div class="logo-container">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Normal-S0ZM46xhJ8Mm0vNUqKXmmqWS9gTvZJ.png" alt="HIP ENERGY Logo" class="logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Mesa%20de%20trabajo%201-TjFuYsVlQgl9Ta1BrpM07YkWC0xgbr.png" alt="HIP ENERGY Logo" class="logo">
         </div>
     </nav>
 
     <main class="main-content">
-        <h1>Energy Consumption Dashboard</h1>
-        <div class="dashboard">
-            <div class="card">
-                <h2>Total Consumption</h2>
-                <div class="stat">1,234 kWh</div>
-                <p>This month</p>
-            </div>
-            <div class="card">
-                <h2>Daily Average</h2>
-                <div class="stat">41.13 kWh</div>
-                <p>Last 30 days</p>
-            </div>
-            <div class="card">
-                <h2>Peak Usage</h2>
-                <div class="stat">78 kWh</div>
-                <p>Highest day this month</p>
-            </div>
-            <div class="card">
-                <h2>Monthly Comparison</h2>
-                <div class="chart-container">
-                    <canvas id="monthlyChart"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <h2>Daily Usage</h2>
-                <div class="chart-container">
-                    <canvas id="dailyChart"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <h2>Energy Sources</h2>
-                <div class="chart-container">
-                    <canvas id="sourcesChart"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <h2>Carbon Footprint</h2>
-                <div class="stat">0.85 tons</div>
-                <p>CO2 emissions this month</p>
-            </div>
-            <div class="card">
-                <h2>Energy Savings</h2>
-                <div class="stat">15%</div>
-                <p>Compared to last month</p>
-            </div>
-            <div class="card">
-                <h2>Next Bill Estimate</h2>
-                <div class="stat">$145.20</div>
-                <p>Based on current usage</p>
-            </div>
-            <div class="card">
-                <h2>Energy Efficiency Score</h2>
-                <div class="stat">B+</div>
-                <p>Room for improvement</p>
-            </div>
-        </div>
+        <h1>Hello, Gonzalo!</h1>
+        <p>Welcome back to your account</p>
     </main>
 
     <svg style="display: none;">
@@ -414,7 +302,6 @@
         accessibleModeToggle.addEventListener('click', (e) => {
             e.preventDefault();
             document.body.classList.toggle('accessible-mode');
-            updateChartsForAccessibleMode();
         });
 
         function toggleColorBlindMode(mode) {
@@ -440,161 +327,6 @@
             e.preventDefault();
             toggleColorBlindMode(null);
         });
-
-        function updateChartsForAccessibleMode() {
-            const isAccessible = document.body.classList.contains('accessible-mode');
-            const charts = [monthlyChart, dailyChart, sourcesChart];
-            charts.forEach(chart => {
-                if (isAccessible) {
-                    chart.options.plugins.legend.labels.color = '#000000';
-                    chart.options.scales.x.ticks.color = '#000000';
-                    chart.options.scales.y.ticks.color = '#000000';
-                } else {
-                    chart.options.plugins.legend.labels.color = '#000000';
-                    chart.options.scales.x.ticks.color = '#000000';
-                    chart.options.scales.y.ticks.color = '#000000';
-                }
-                chart.update();
-            });
-        }
-
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#000000'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#000000'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: '#000000'
-                    }
-                }
-            }
-        };
-
-        // Monthly Comparison Chart
-        const monthlyChart = new Chart(document.getElementById('monthlyChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Monthly Consumption (kWh)',
-                    data: [1000, 1200, 980, 1100, 1300, 1234],
-                    backgroundColor: '#f2c517'
-                }]
-            },
-            options: { ...chartOptions }
-        });
-
-        // Daily Usage Chart
-        const dailyChart = new Chart(document.getElementById('dailyChart'), {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Daily Usage (kWh)',
-                    data: [45, 39, 60, 75, 56, 55, 40],
-                    borderColor: '#8833ff',
-                    tension: 0.1
-                }]
-            },
-            options: { ...chartOptions }
-        });
-
-        // Energy Sources Chart
-        const sourcesChart = new Chart(document.getElementById('sourcesChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Solar', 'Wind', 'Hydro', 'Natural Gas'],
-                datasets: [{
-                    label: 'Energy Sources (kWh)',
-                    data: [30, 25, 20, 25],
-                    backgroundColor: ['#d4a017', '#8833ff', '#00a8e8', '#007ea7'],
-                    borderWidth: 1,
-                    borderColor: '#fff'
-                }]
-            },
-            options: { ...chartOptions,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            },
-            plugins: [{
-                afterDraw: function(chart) {
-                    const ctx = chart.ctx;
-                    chart.data.datasets.forEach((dataset, i) => {
-                        const meta = chart.getDatasetMeta(i);
-                        if (!meta.hidden) {
-                            meta.data.forEach((element, index) => {
-                                ctx.save();
-                                const x = element.x;
-                                const y = element.y;
-                                const height = element.height;
-                                const width = element.width;
-                                ctx.fillStyle = createPattern(ctx, chart.data.datasets[0].backgroundColor[index], index);
-                                ctx.fillRect(x - width / 2, y, width, height);
-                                ctx.restore();
-                            });
-                        }
-                    });
-                }
-            }]
-        });
-
-        function createPattern(ctx, color, index) {
-            const patternCanvas = document.createElement('canvas');
-            const patternContext = patternCanvas.getContext('2d');
-            patternCanvas.width = 20;
-            patternCanvas.height = 20;
-            patternContext.fillStyle = color;
-            patternContext.fillRect(0, 0, 20, 20);
-            patternContext.strokeStyle = '#fff';
-            patternContext.lineWidth = 2;
-
-            switch(index) {
-                case 0: // Stripes for Solar
-                    patternContext.beginPath();
-                    patternContext.moveTo(0, 0);
-                    patternContext.lineTo(20, 20);
-                    patternContext.stroke();
-                    break;
-                case 1: // Circles for Wind
-                    patternContext.beginPath();
-                    patternContext.arc(10, 10, 6, 0, Math.PI * 2);
-                    patternContext.stroke();
-                    break;
-                case 2: // Squares for Hydro
-                    patternContext.strokeRect(4, 4, 12, 12);
-                    break;
-                case 3: // Triangles for Natural Gas
-                    patternContext.beginPath();
-                    patternContext.moveTo(10, 2);
-                    patternContext.lineTo(18, 18);
-                    patternContext.lineTo(2, 18);
-                    patternContext.closePath();
-                    patternContext.stroke();
-                    break;
-            }
-
-            return ctx.createPattern(patternCanvas, 'repeat');
-        }
     </script>
 </body>
 </html>

@@ -10,7 +10,7 @@
         :root {
             --primary-color: #f2c517;
             --primary-dark: #d4a017;
-            --accent-color: #8833ff;
+            --accent-color: #f2c517;
             --text-color: #000;
             --transition-speed: 0.3s;
             --divider-width: 6px;
@@ -29,11 +29,11 @@
             --primary-color: #000000;
             --primary-dark: #ffffff;
             --accent-color: #ffffff;
-            --text-color: #ffffff;
+            --text-color: #000000;
         }
 
         .accessible-mode .logo {
-            filter: invert(1);
+            content: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/negra-breHQ41WqrzgIYL6eWCIeGlva5Wk1f.png');
         }
 
         .sidebar {
@@ -112,20 +112,6 @@
             opacity: 1;
         }
 
-        .notification-badge {
-            background-color: #ff4444;
-            color: white;
-            border-radius: 50%;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
-            margin-left: auto;
-        }
-
-        .accessible-mode .notification-badge {
-            background-color: #ffffff;
-            color: #000000;
-        }
-
         .logo-container {
             padding: 1rem;
             margin: 1rem;
@@ -141,24 +127,14 @@
         .logo {
             width: 150px;
             height: auto;
-            transition: filter var(--transition-speed);
         }
 
         .main-content {
             margin-left: var(--sidebar-width);
             padding: 2rem;
-            transition: margin-left var(--transition-speed) ease, background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-        }
-
-        .accessible-mode .main-content {
+            transition: margin-left var(--transition-speed) ease;
+            min-height: 100vh;
             background-color: var(--primary-color);
-            color: var(--text-color);
         }
 
         .main-content::before {
@@ -194,6 +170,63 @@
             margin-top: auto;
         }
 
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .recover-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .recover-password a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .recover-password a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: var(--sidebar-width);
@@ -211,34 +244,21 @@
     <nav class="sidebar">
         <div class="brand">HIP ENERGY</div>
         <div class="nav-items">
-            <a href="index.html" class="nav-item active">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="consumo.html" class="nav-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Consumption</span>
-            </a>
-            <a href="facturas.html" class="nav-item">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <span>Bills</span>
-            </a>
-            <a href="notificaciones.html" class="nav-item">
-                <i class="fas fa-bell"></i>
-                <span>Notifications</span>
-                <div class="notification-badge">4</div>
-            </a>
-            <a href="citas.html" class="nav-item">
-                <i class="fas fa-calendar-alt"></i>
-                <span>Appointments</span>
-            </a>
-            <a href="modoaccesible.html" class="nav-item">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Fault Reporting</span>
-            </a>
             <a href="#" class="nav-item" id="accessibleModeToggle">
                 <i class="fas fa-universal-access"></i>
                 <span>Accessible Mode</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-user-plus"></i>
+                <span>Register</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-key"></i>
+                <span>Recover Password</span>
             </a>
         </div>
         <div class="vision-modes">
@@ -260,13 +280,28 @@
             </a>
         </div>
         <div class="logo-container">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Mesa%20de%20trabajo%201-TjFuYsVlQgl9Ta1BrpM07YkWC0xgbr.png" alt="HIP ENERGY Logo" class="logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Normal-S0ZM46xhJ8Mm0vNUqKXmmqWS9gTvZJ.png" alt="HIP ENERGY Logo" class="logo">
         </div>
     </nav>
 
     <main class="main-content">
-        <h1>Hello, Gonzalo!</h1>
-        <p>Welcome back to your account</p>
+        <h1>Login</h1>
+        <div class="form-container">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <div class="recover-password">
+                <a href="#">Recover password</a>
+            </div>
+        </div>
     </main>
 
     <svg style="display: none;">
